@@ -1,16 +1,26 @@
 require 'gosu'
 
 class Player
-  def initialize(window,image="media/pikachu.png")
+  attr_accessor :pokemon, :score
+
+  def initialize(window)
     @window = window
     @x = 320
     @y= 240
     # @pokemons = ["media/bulbasaur.png","media/pikachu.png","media/raichu.png"]
-    # @image = Gosu::Image.new(@pokemons.sample)
-    @image = Gosu::Image.new(image)
+    #@image = Gosu::Image.new(@pokemons.sample)
+    @pokemon="media/pikachu.png"
+    @image = Gosu::Image.new(@pokemon)
     @beep = Gosu::Sample.new("media/pika.wav")
     @vel_x = @vel_y = @angle = 0.0
     @score = 0
+  end
+
+
+
+
+  def update_image(image)
+    @image = Gosu::Image.new(image)
   end
 
   def warp(x, y)

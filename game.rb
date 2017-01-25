@@ -1,7 +1,7 @@
 require 'gosu'
 require_relative 'ball'
 require_relative 'player'
-
+require 'pry-byebug'
 
 class GameWindow < Gosu::Window
   def initialize
@@ -40,12 +40,22 @@ class GameWindow < Gosu::Window
       @player.stop
     end
 
-    # if @player.score == 50
-    #   @evolve = Gosu::Font.new(self, 'Ubuntu Sans', 32)
-    # end
+     if @player.score == 50
+       @evolve = Gosu::Font.new(self, 'Ubuntu Sans', 32)
+     end
 
     if @player.outside_bounds?
       @new_game = Gosu::Font.new(self, 'Ubuntu Sans', 32)
+    end
+
+    if @evolve and button_down? Gosu::KbReturn
+
+      @evolve = nil
+      @player.score += 10
+      @player.update_image("media/raichu.png")
+
+
+
     end
 
     if @new_game and button_down? Gosu::KbReturn
@@ -68,12 +78,13 @@ class GameWindow < Gosu::Window
       @new_game.draw("Your Score was #{@player.score}", 5, 200, 100)
       @new_game.draw("Press Return to Try Again", 5, 250, 100)
       @new_game.draw("Or Escape to Close", 5, 300, 100)
-    # elsif @evolve
+     elsif @evolve
 
-    #   @evolve.draw("SCOOOOOOOOOOOOORE", 5, 300, 100)
+       @evolve.draw("Time to grow", 5, 300, 100)
 
     else
       @background_image.draw(0, 0, ZOrder::Background)
+
       @player.draw
       @stars.each { |star| star.draw }
       @font.draw("Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ff0000)

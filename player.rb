@@ -1,16 +1,17 @@
 require 'gosu'
 
 class Player
-  attr_accessor :pokemon, :score
+  attr_accessor :pokemon_copy, :score
 
   def initialize(window)
     @window = window
     @x = 320
     @y= 240
-    # @pokemons = ["media/bulbasaur.png","media/pikachu.png","media/raichu.png"]
+    @pokemon = ["media/pikachu.png","media/raichu.png"]
+    @pokemon_copy = @pokemon
     #@image = Gosu::Image.new(@pokemons.sample)
     @pokemon="media/pikachu.png"
-    @image = Gosu::Image.new(@pokemon)
+    @image = Gosu::Image.new(@pokemon_copy[0])
     @beep = Gosu::Sample.new("media/pika.wav")
     @vel_x = @vel_y = @angle = 0.0
     @score = 0
@@ -52,8 +53,8 @@ class Player
     @x %= 640
     @y %= 480
 
-    @vel_x *= 0.95
-    @vel_y *= 0.95
+    @vel_x *= 0.85
+    @vel_y *= 0.85
   end
 
   def draw

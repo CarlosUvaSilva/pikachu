@@ -17,7 +17,7 @@ class GameWindow < Gosu::Window
     @stars = ["media/pokeball.png","media/masterball.png"]
     @star_anim = Gosu::Image::load_tiles(@stars.sample, 25, 25)
     @stars = Array.new
-    @start_music = Gosu::Song.new("media/pokemon_theme.wav")
+    @start_music = Gosu::Song.new("media/pokemon_theme_full.wav")
     @start_music.play(true)
   end
 
@@ -52,8 +52,9 @@ class GameWindow < Gosu::Window
 
       @evolve = nil
       @player.score += 10
-
-      @player.update_image("media/raichu.png")
+      @player.pokemon_copy.shift
+      image = @player.pokemon_copy[0]
+      @player.update_image(image)
 
 
 
@@ -81,7 +82,7 @@ class GameWindow < Gosu::Window
       @new_game.draw("Or Escape to Close", 5, 300, 100)
      elsif @evolve
 
-       @evolve.draw("Time to grow", 5, 300, 100)
+       @evolve.draw("Time to Evolve", 5, 300, 100)
 
     else
       @background_image.draw(0, 0, ZOrder::Background)

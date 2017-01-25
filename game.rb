@@ -52,6 +52,7 @@ class GameWindow < Gosu::Window
 
       @evolve = nil
       @player.score += 10
+
       @player.update_image("media/raichu.png")
 
 
